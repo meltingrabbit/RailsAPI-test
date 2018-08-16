@@ -1,0 +1,106 @@
+@echo off
+
+
+curl http://localhost:3000/friends -X POST ^
+	-d "friend[name]=Suzuki Ryohei" ^
+	-d "friend[address]=tokyo" ^
+	-d "friend[description]=hoge"
+
+
+curl http://localhost:3000/friends -X POST ^
+	-d "friend[name]=Oda Toshiki" ^
+	-d "friend[address]=saitama" ^
+	-d "friend[description]=hoge"
+
+
+curl http://localhost:3000/friends -X POST ^
+	-d "friend[name]=Tokugawa" ^
+	-d "friend[address]=saitama" ^
+	-d "friend[description]=hoge"
+
+
+curl http://localhost:3000/friends -X POST ^
+	-d "friend[name]=小川" ^
+	-d "friend[address]=saitama" ^
+	-d "friend[description]=hoge"
+
+
+curl http://localhost:3000/friends -X POST ^
+	--data-urlencode "friend[name]=小川" ^
+	-d "friend[address]=saitama" ^
+	-d "friend[description]=hoge"
+
+
+curl http://localhost:3000/friends -X POST -H 'Content-Type:application/json' --data-binary "{\"friend\":{\"name\":\"Okita\",\"address\":\"kanagawa\",\"description\":\"fuga\"}}"
+
+rem cygwin
+curl http://localhost:3000/friends -X POST -H 'Content-Type:application/json' -d '{"friend":{"name":"Okita","address":"kanagawa","description":"fuga"}}'
+
+
+rem 以下だめ
+
+curl http://localhost:3000/friends -X POST -H 'Content-Type:application/json' --data-binary '{"friend":{"name":"沖田","address":"kanagawa","description":"fuga"}}'
+curl http://localhost:3000/friends -X POST -H 'Content-Type:application/json' --data-urlencode '{"friend":{"name":"沖田","address":"kanagawa","description":"fuga"}}'
+curl http://localhost:3000/friends -X POST -H 'Content-Type:application/json' --data-urlencode '{"friend":{"name":"沖田","address":"kanagawa","description":"fuga"}}'
+
+
+
+curl http://localhost:3000/friends -X POST \
+  -d "friend[name]=ogawa" \
+  -d "friend[address]=saitama" \
+  -d "friend[description]=hoge"
+
+curl http://localhost:3000/friends -X POST \
+  --data-urlencode "friend[name]=小川" \
+  -d "friend[address]=saitama" \
+  -d "friend[description]=hoge"
+
+
+
+curl http://localhost:3000/friends -X POST -H 'Content-Type:application/json' -d '{"friend":{"name":"田中","address":"kanagawa","description":"fuga"}}'
+
+curl http://localhost:3000/friends -X GET
+
+curl http://localhost:3000/friends/1 -X GET
+
+curl http://localhost:3000/friends/2 -X DELETE
+
+
+curl http://localhost:3000/friends -X POST -H 'Content-Type:application/json' -d "{\"friend\":{\"name\":\"Okita\",\"address\":\"kanagawa\",\"description\":\"fuga\"}}"
+
+
+
+
+curl http://localhost:3000/friends -X POST -H 'Content-Type:application/json' -d '{\"data\":\"hello\"}'
+
+curl http://localhost:3000/friends -X POST -H 'Content-Type:application/json' -d '{"data":"hello"}'
+
+curl http://localhost:3000/friends -X POST -i -H "Content-Type: application/json" -d '{\"data\":\"hello\"}'
+
+
+
+echo.
+
+pause
+
+
+
+
+ps
+
+Invoke-RestMethod `
+    -Uri http://localhost:3000/friends `
+    -Method POST `
+    -ContentType 'application/json' `
+    -Body '{"friend":{"name":"Kagawa","address":"kanagawa","description":"fuga"}}'
+
+
+
+$json = '{"friend":{"name":"香川","address":"kanagawa","description":"fuga"}}'
+$ejson = [System.Text.Encoding]::UTF8.GetBytes($json)
+Invoke-RestMethod `
+    -Uri http://localhost:3000/friends `
+    -Method POST `
+    -ContentType 'application/json' `
+    -Body $ejson
+

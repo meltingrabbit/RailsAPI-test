@@ -15,6 +15,9 @@ class FriendsController < ApplicationController
 
   # POST /friends
   def create
+    puts "====================="
+    puts params
+    puts "====================="
     @friend = Friend.new(friend_params)
 
     if @friend.save
