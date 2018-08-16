@@ -1,5 +1,5 @@
 class FriendsController < ApplicationController
-  before_action :set_friend, only: [:show, :update, :destroy]
+  before_action :set_friend, only: [:show, :update, :destroy, :setMyId]
 
   # GET /friends
   def index
@@ -53,6 +53,27 @@ class FriendsController < ApplicationController
     @friend.destroy
   end
 
+  # POST /friends/setMyId/1
+  def setMyId
+    prm = myId_params
+    puts "====================="
+    puts prm
+    puts "@friend.id     : #{@friend.id}"
+    puts "@friend.my_id  : #{prm[:new_id]}"
+    puts "====================="
+    if @friend.update({my_id: prm[:new_id]})
+      render json: @friend
+    else
+      render json: @friend.errors, status: :unprocessable_entity
+    end
+  end
+
+  # POST /friends/searchMyId
+  def searchMyId
+
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_friend
@@ -62,5 +83,8 @@ class FriendsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def friend_params
       params.require(:friend).permit(:name, :address, :description, :my_id)
+    end
+    def myId_params
+      params.require(:friend).permit(:my_id, :new_id)
     end
 end

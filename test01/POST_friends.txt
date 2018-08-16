@@ -1,4 +1,9 @@
 @echo off
+curl http://localhost:3000/friends -X GET
+
+curl http://localhost:3000/friends/1 -X GET
+
+curl http://localhost:3000/friends/2 -X DELETE
 
 
 curl http://localhost:3000/friends -X POST ^
@@ -59,11 +64,6 @@ curl http://localhost:3000/friends -X POST \
 
 curl http://localhost:3000/friends -X POST -H 'Content-Type:application/json' -d '{"friend":{"name":"田中","address":"kanagawa","description":"fuga"}}'
 
-curl http://localhost:3000/friends -X GET
-
-curl http://localhost:3000/friends/1 -X GET
-
-curl http://localhost:3000/friends/2 -X DELETE
 
 
 curl http://localhost:3000/friends -X POST -H 'Content-Type:application/json' -d "{\"friend\":{\"name\":\"Okita\",\"address\":\"kanagawa\",\"description\":\"fuga\"}}"
@@ -112,4 +112,19 @@ Invoke-RestMethod `
     -Method POST `
     -ContentType 'application/json' `
     -Body $ejson
+
+Invoke-RestMethod `
+    -Uri http://localhost:3000/friends `
+    -Method GET `
+
+
+$json = '{"friend":{"new_id":99}}'
+$ejson = [System.Text.Encoding]::UTF8.GetBytes($json)
+Invoke-RestMethod `
+    -Uri http://localhost:3000/friends/3/setMyId `
+    -Method POST `
+    -ContentType 'application/json' `
+    -Body $ejson
+
+
 
