@@ -118,13 +118,23 @@ Invoke-RestMethod `
     -Method GET `
 
 
-$json = '{"friend":{"new_id":99}}'
+$json = '{"friend":{"my_id":99}}'
 $ejson = [System.Text.Encoding]::UTF8.GetBytes($json)
 Invoke-RestMethod `
-    -Uri http://localhost:3000/friends/3/setMyId `
+    -Uri http://localhost:3000/friends/4/setMyId `
     -Method POST `
     -ContentType 'application/json' `
     -Body $ejson
 
+
+
+
+$json = '{"friend":{"my_id":99}}'
+$ejson = [System.Text.Encoding]::UTF8.GetBytes($json)
+Invoke-RestMethod `
+    -Uri http://localhost:3000/friends/searchMyId `
+    -Method POST `
+    -ContentType 'application/json' `
+    -Body $ejson
 
 

@@ -59,9 +59,9 @@ class FriendsController < ApplicationController
     puts "====================="
     puts prm
     puts "@friend.id     : #{@friend.id}"
-    puts "@friend.my_id  : #{prm[:new_id]}"
+    puts "@friend.my_id  : #{prm[:my_id]}"
     puts "====================="
-    if @friend.update({my_id: prm[:new_id]})
+    if @friend.update({my_id: prm[:my_id]})
       render json: @friend
     else
       render json: @friend.errors, status: :unprocessable_entity
@@ -85,6 +85,6 @@ class FriendsController < ApplicationController
       params.require(:friend).permit(:name, :address, :description, :my_id)
     end
     def myId_params
-      params.require(:friend).permit(:my_id, :new_id)
+      params.require(:friend).permit(:my_id)
     end
 end
