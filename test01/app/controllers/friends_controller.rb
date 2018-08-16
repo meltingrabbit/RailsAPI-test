@@ -53,7 +53,7 @@ class FriendsController < ApplicationController
     @friend.destroy
   end
 
-  # POST /friends/setMyId/1
+  # POST /friends/1/setMyId
   def setMyId
     prm = myId_params
     puts "====================="
