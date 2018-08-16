@@ -70,7 +70,14 @@ class FriendsController < ApplicationController
 
   # POST /friends/searchMyId
   def searchMyId
-
+    prm = myId_params
+    @friends = Friend.where(my_id: 99)
+    puts "====================="
+    puts [1 , 4 ].class
+    puts @friends.class
+    puts Friend.all.class
+    puts "====================="
+    render json: @friends
   end
 
 
