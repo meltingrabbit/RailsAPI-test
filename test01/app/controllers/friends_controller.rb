@@ -19,12 +19,24 @@ class FriendsController < ApplicationController
     puts params
     puts "====================="
     @friend = Friend.new(friend_params)
+    # puts "====================="
+    # puts @friend.id
+    # puts @friend.name
+    # puts "====================="
 
     if @friend.save
+      puts "====================="
+      puts @friend.id
+      puts @friend.name
+      puts "====================="
+
+      @friend.my_id = @friend.id + 1
+      @friend.save
       render json: @friend, status: :created, location: @friend
     else
       render json: @friend.errors, status: :unprocessable_entity
     end
+
   end
 
   # PATCH/PUT /friends/1
@@ -49,6 +61,6 @@ class FriendsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def friend_params
-      params.require(:friend).permit(:name, :address, :description)
+      params.require(:friend).permit(:name, :address, :description, :my_id)
     end
 end

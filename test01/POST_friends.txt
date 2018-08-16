@@ -8,7 +8,7 @@ curl http://localhost:3000/friends -X POST ^
 
 
 curl http://localhost:3000/friends -X POST ^
-	-d "friend[name]=Oda Toshiki" ^
+	-d "friend[name]=Oda" ^
 	-d "friend[address]=saitama" ^
 	-d "friend[description]=hoge"
 
@@ -96,7 +96,16 @@ Invoke-RestMethod `
 
 
 
-$json = '{"friend":{"name":"香川","address":"kanagawa","description":"fuga"}}'
+$json = '{"friend":{"name":"鈴木","address":"kanagawa","description":"fuga"}}'
+$ejson = [System.Text.Encoding]::UTF8.GetBytes($json)
+Invoke-RestMethod `
+    -Uri http://localhost:3000/friends `
+    -Method POST `
+    -ContentType 'application/json' `
+    -Body $ejson
+
+
+$json = '{"friend":{"name":"吉岡","address":"kanagawa","description":"fuga"}}'
 $ejson = [System.Text.Encoding]::UTF8.GetBytes($json)
 Invoke-RestMethod `
     -Uri http://localhost:3000/friends `
